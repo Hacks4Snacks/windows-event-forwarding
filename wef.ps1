@@ -1,18 +1,23 @@
-###########################################
-#
-# Windows Event Forwarding Configuration Script
-#
-# To execute this script:
-# 1) Open powershell window as administrator
-# 2) Allow script execution by running command "Set-ExecutionPolicy Unrestricted"
-# 3) Execute the script by running ".\wef.ps1"
-# NXLog msi, conf, and patterndb file must be in the same directory as the script
-# in order to it to function properly.
-#
-# Version: 0.1.0
-# Last modification: 2019-10-23
-###########################################
+<#
 
+.SYNOPSIS
+Windows Event Forwarding Collection Server Configuration Script.
+
+.DESCRIPTION
+This script is designed to run on a "to be" Windows Event Collection Server to assist
+in automating the required configurations. The NXLog msi, conf, and patterndb file must 
+be in the same directory as the script in order for it to function properly.
+To execute this script:
+1) Open powershell window as administrator
+2) Allow script execution by running command "Set-ExecutionPolicy Unrestricted"
+
+.EXAMPLE
+PS > .\wef.ps1
+Interactive prompts will appear in the terminal.
+
+.LINK
+
+#>
 
 # Check to make sure script is running as admin
 Write-Host "[+] Checking if script is running as administrator.."
