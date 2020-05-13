@@ -7,6 +7,7 @@ Windows Event Forwarding Collection Server Configuration Script.
 This script is designed to run on a "to be" Windows Event Collection Server to assist
 in automating the required configurations. The NXLog msi, conf, and patterndb file must 
 be in the same directory as the script in order for it to function properly.
+
 To execute this script:
 1) Open powershell window as administrator
 2) Allow script execution by running command "Set-ExecutionPolicy Unrestricted"
