@@ -21,11 +21,9 @@ Disclaimer:
 ## Repository Structure
 
 
-## Source Material
-
-
 ## Contributing
 
+Please submit all improvements, contributions, and fixes as a GitHub issue or a pull request.
 
 ## Additional Information and Guidance
 
