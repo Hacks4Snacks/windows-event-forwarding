@@ -74,7 +74,8 @@ This size can be set to whatever is desired, but remember the main performance b
 so if had a reason to make this 10GB of log, you'll need roughly 15GB of RAM allocated to the host.
 #>
 
-wevtutil sl forwardedevents /ms:2147483648
+#10GB
+wevtutil sl forwardedevents /ms:10485760
 
 #Running quickconfig for subscription service
 wecutil qc -quiet
@@ -91,17 +92,17 @@ MalwareEvents.xml =
 
 #Import the desired subscriptions 
 
-$response_subs = (Read-Host -Prompt "[+] Would you like to autoload the included subscriptions? Y/N").ToUpper()
-if ($response_subs -ne "N") {
-    Write-Host "[*] Loading configurations. Be sure to change the Source Computer Groups" -ForegroundColor Green
+#$response_subs = (Read-Host -Prompt "[+] Would you like to autoload the included subscriptions? Y/N").ToUpper()
+#if ($response_subs -ne "N") {
+#    Write-Host "[*] Loading configurations. Be sure to change the Source Computer Groups" -ForegroundColor Green
     #wecutil cs "InterestingAccounts.xml"
     #wecutil cs "MalwareEvents.xml"
-    wecutil cs "mtdrcore.xml"
-    Write-Host "[*] Done. Be sure to change the Source Computer Groups" -ForegroundColor Yellow
-}
-else {
-    Write-Host "`t[*] Continuing.." -ForegroundColor Green
-}
+#    wecutil cs "mtdrcore.xml"
+#    Write-Host "[*] Done. Be sure to change the Source Computer Groups" -ForegroundColor Yellow
+#}
+#else {
+#    Write-Host "`t[*] Continuing.." -ForegroundColor Green
+#}
 
 
 #Set the Windows Event Collector Service to start type automatic, it's automatic with delayed start by default, which is fine as that lets the dependencies churn in. 
