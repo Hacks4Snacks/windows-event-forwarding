@@ -13,6 +13,7 @@ This respository is still very much a work in progress.
 
 ## Windows Event Forwarding
 
+In progress.
 
 ## How To Use This Repository
 
@@ -20,6 +21,7 @@ Disclaimer: Please ensure proper testing is performed prior to production/large 
 
 ## Repository Structure
 
+In progress.
 
 ## Contributing
 
