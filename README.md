@@ -16,7 +16,7 @@ This respository is still very much a work in progress.
 
 ## How To Use This Repository
 
-Disclaimer:
+Disclaimer: Please ensure proper testing is performed prior to production/large scale implemenation.
 
 ## Repository Structure
 
