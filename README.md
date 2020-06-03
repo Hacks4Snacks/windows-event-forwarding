@@ -1,4 +1,4 @@
-# windows-event-forwarding
+# Windows Event Forwarding Configuration Guidance
 The purpose of this repository is to provide tools for a basic implementation and gentle introduction of Windows Event Forwarding.
 
 ## Advisory
