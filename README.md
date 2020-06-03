@@ -5,7 +5,7 @@ The purpose of this repository is to provide tools for a basic implementation as
 
 This respository is still very much a work in progress.
 
-**Disclaimer**: Please ensure proper testing is preformed prior to applying guidance within this repository into a production environment.
+**Disclaimer**: Please ensure proper testing is preformed prior to applying guidance within this repository into a production environment. Additionally, scripts make everything magically simple, however I strongly recommend reviewing the documentation folder that contains additional information that may be useful for creating the required GPOs as well as how to do a manual WEF implementation without a script.
 
 ## Windows Event Forwarding
 
@@ -20,7 +20,7 @@ Windows Event Forwarding (WEF) is a powerful log forwarding solution integrated 
 
 ## How To Use This Repository
 
-1. Download the repository and review the content.
+1. Download the repository and review the content (including the documentation folder).
 2. Using the provided script, configure one or more Windows Event Collection servers.
 3. Create one or more WEF subscriptions on the Windows Event Collection server(s).
 4. Create and implement appropriate auditing GPOs within the target environment.
@@ -30,6 +30,7 @@ Windows Event Forwarding (WEF) is a powerful log forwarding solution integrated 
 
 In progress.
 * [**Group Policy Objects**](./group-policy-objects/): GPO recommendations for configuring auditing, enabling windows event collection/forwarding, etc.
+* [**Documentation**](./documentation): Additional guidance on WEF, instructions for creating the required GPOs, and information on what events should be collected (at a minimum).
 
 ## Contributing
 
