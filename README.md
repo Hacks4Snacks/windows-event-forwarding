@@ -1,5 +1,5 @@
 # Windows Event Forwarding Configuration Guidance
-The purpose of this repository is to provide tools for a basic implementation and gentle introduction of Windows Event Forwarding.
+The purpose of this repository is to provide tools for a basic implementation as well as a gentle introduction of Windows Event Forwarding.
 
 ## Advisory
 
@@ -14,6 +14,8 @@ Windows Event Forwarding (WEF) is a powerful log forwarding solution integrated 
 * Windows Event Forwarding allows for event logs to be sent, either via a push or pull mechanism, to one or more centralized Windows Event Collector (WEC) servers.
 * WEF is agent-free, and relies on native components integrated into the operating system. WEF is supported for both workstation and server builds of Windows.
 * WEF supports mutual authentication and encryption through Kerberos (in a domain), or can be extended through the usage of TLS (additional authentication or for non-domain joined machines).
+* Easily managed and configured using GPO.
+* Supports EVTX (Standard Windows Logs).
 * WEF has a rich XML-based language that can control which event IDs are submitted, suppress noisy events, batch events together, and send events as quickly or slowly as desired. Subscription XML supports a subset of [XPath](https://msdn.microsoft.com/en-us/library/windows/desktop/dd996910(v=vs.85).aspx#limitations), which simplifies the process of writing expressions to select the events you're interested in.
 
 ## How To Use This Repository
@@ -23,7 +25,6 @@ Windows Event Forwarding (WEF) is a powerful log forwarding solution integrated 
 3. Create one or more WEF subscriptions on the Windows Event Collection server(s).
 4. Create and implement appropriate auditing GPOs within the target environment.
 5. Verify log collection on the Windows Event Collection server(s).
-
 
 ## Repository Structure
 
