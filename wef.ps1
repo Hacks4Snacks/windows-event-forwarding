@@ -21,48 +21,48 @@ Interactive prompts will appear in the terminal.
 #>
 
 # Check to make sure script is running as admin
-Write-Verbose "[+] Checking if script is running as administrator.."
+Write-Host "[+] Checking if script is running as administrator.."
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal( [Security.Principal.WindowsIdentity]::GetCurrent() )
 if (-Not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Verbose "`t[ERR] Please run this script as administrator`n" -ForegroundColor Red
+    Write-Host "`t[ERR] Please run this script as administrator`n" -ForegroundColor Red
     Read-Host  "Press any key to continue"
   exit
 }
 
 # Check to make sure host has been updated
-Write-Verbose "[+] Checking if host has been configured with updates"
+Write-Host "[+] Checking if host has been configured with updates"
 if (-Not (get-hotfix | where { (Get-Date($_.InstalledOn)) -gt (get-date).adddays(-30) })) {
-    Write-Verbose "`t[ERR] This machine has not been updated in the last 30 days, please run Windows Updates to continue`n" -ForegroundColor Red
+    Write-Host "`t[ERR] This machine has not been updated in the last 30 days, please run Windows Updates to continue`n" -ForegroundColor Red
     Read-Host  "Press any key to continue"
     exit
 }
 else
 {
-	Write-Verbose "`t[*] Updates appear to be in order" -ForegroundColor Green
+	Write-Host "`t[*] Updates appear to be in order" -ForegroundColor Green
 }
 
 #Check to make sure host has enough disk space
-Write-Verbose "[+] Checking if host has enough disk space"
+Write-Host "[+] Checking if host has enough disk space"
 $disk = Get-PSDrive C
 Start-Sleep -Seconds 1
 if (-Not (($disk.used + $disk.free)/1GB -gt 58.8)){
-    Write-Verbose "`t[ERR] We recommend a minimum 60 GB hard drive, please increase hard drive space to continue`n" -ForegroundColor Red
+    Write-Host "`t[ERR] We recommend a minimum 60 GB hard drive, please increase hard drive space to continue`n" -ForegroundColor Red
     Read-Host "Press any key to continue"
     exit
 }
 else
 {
-    Write-Verbose "`t> 60 GB hard drive. looks good" -ForegroundColor Green
+    Write-Host "`t> 60 GB hard drive. looks good" -ForegroundColor Green
 }
 
 # Prompt user to remind them to take a snapshot
 
 $response = (Read-Host -Prompt "[-] Do you need to take a snapshot before continuing? Y/N").ToUpper()
 if ($response -ne "N") {
-    Write-Verbose "[*] Exiting.." -ForegroundColor Red
+    Write-Host "[*] Exiting.." -ForegroundColor Red
     exit
 }
-Write-Verbose "`t[*] Continuing.." -ForegroundColor Green
+Write-Host "`t[*] Continuing.." -ForegroundColor Green
 
 #Setting WinRM Service to automatic start and running quickconfig
 Set-Service -Name winrm -StartupType Automatic
@@ -78,12 +78,12 @@ winrm quickconfig -quiet
 #    if ($log_folder_path -notmatch '.+?\\$') {
 #        $log_folder_path += '\'
 #    }
-#    write-Verbose "[*] Verifying log folder path: $log_folder_path" -ForegroundColor Yellow
+#    Write-Host "[*] Verifying log folder path: $log_folder_path" -ForegroundColor Yellow
 #    if ((Test-Path $log_folder_path) -And (Test-Path $log_folder_path -PathType Container)){
-#        Write-Verbose "[*] Desired log folder path is valid." -foregroundcolor Green 
+#        Write-Host "[*] Desired log folder path is valid." -foregroundcolor Green 
 #    }
 #    else {
-#        Write-Verbose "[*] Log folder path not found."  -foregroundcolor Red
+#        Write-Host "[*] Log folder path not found."  -foregroundcolor Red
 #        $create_path = (Read-Host -Prompt "[-] Would you like to create the path now? Y/N").ToUpper()
 #        if ($create_path -eq "N"){
 #            "[*] Aborting operation."
@@ -91,12 +91,12 @@ winrm quickconfig -quiet
 #        } 
 #        else {
 #            New-Item -ItemType "directory" -Path $log_folder_path
-#            Write-Verbose "[*] Log folder path created."  -foregroundcolor Green
+#            Write-Host "[*] Log folder path created."  -foregroundcolor Green
 #        }
 #    }
 #}
 #else {
-#    write-Verbose "Event log files will be kept in the default location C:\Windows\System32\winevt\Logs\" -foregroundcolor Yellow
+#    Write-Host "Event log files will be kept in the default location C:\Windows\System32\winevt\Logs\" -foregroundcolor Yellow
 #}
 #}
 
@@ -126,14 +126,14 @@ MalwareEvents.xml =
 
 #$response_subs = (Read-Host -Prompt "[+] Would you like to autoload the included subscriptions? Y/N").ToUpper()
 #if ($response_subs -ne "N") {
-#    Write-Verbose "[*] Loading configurations. Be sure to change the Source Computer Groups" -ForegroundColor Green
+#    Write-Host "[*] Loading configurations. Be sure to change the Source Computer Groups" -ForegroundColor Green
     #wecutil cs "InterestingAccounts.xml"
     #wecutil cs "MalwareEvents.xml"
 #    wecutil cs "mtdrcore.xml"
-#    Write-Verbose "[*] Done. Be sure to change the Source Computer Groups" -ForegroundColor Yellow
+#    Write-Host "[*] Done. Be sure to change the Source Computer Groups" -ForegroundColor Yellow
 #}
 #else {
-#    Write-Verbose "`t[*] Continuing.." -ForegroundColor Green
+#    Write-Host "`t[*] Continuing.." -ForegroundColor Green
 #}
 
 
@@ -147,17 +147,17 @@ However, if the configuration is changed so that the services run on separate ho
 below are required to reinstate the appropriate permissions. These may not be necessary to run, however we are going to run them just incase.
 #>
 
-Write-Verbose "[+] Checking to make sure Operating System is compatible." 
+Write-Host "[+] Checking to make sure Operating System is compatible." 
   if ((([System.Environment]::OSVersion.Version.Major -eq 10))){
       $port=5985
       $acl="D:(A;;GX;;;S-1-5-80-569256582-2953403351-2909559716-1301513147-412116970)(A;;GX;;;S-1-5-80-4059739203-877974739-1245631912-527174227-2996563517)"
-      Write-Verbose "`t[+] $((Get-WmiObject -class Win32_OperatingSystem).Caption) is supported, just need to make a quick aqjustment to the URL ACL." -ForegroundColor Yellow
+      Write-Host "`t[+] $((Get-WmiObject -class Win32_OperatingSystem).Caption) is supported, just need to make a quick aqjustment to the URL ACL." -ForegroundColor Yellow
       & netsh http delete urlacl url=http://+:$port/wsman *>$null
       & netsh http add urlacl url=http://+:$port/wsman sddl=$acl *>$null
   }
   else
   {
-    Write-Verbose "`t[+] $((Get-WmiObject -class Win32_OperatingSystem).Caption) supported no changes needed." -ForegroundColor Green
+    Write-Host "`t[+] $((Get-WmiObject -class Win32_OperatingSystem).Caption) supported no changes needed." -ForegroundColor Green
   }
 
   # Install NXLog, Modify sensor IP in the configuration, and copy the patterndb file to the conf dir
@@ -166,12 +166,12 @@ Write-Verbose "[+] Checking to make sure Operating System is compatible."
   $installdir = "C:\Program Files (x86)\nxlog"
   $path = Get-location
   if ($response_nxlog -ne "Y") {
-      Write-Verbose "`t[*] Continuing. Be advised, NXLog must be installed to send logs to the sensor" -ForegroundColor Yellow
+      Write-Host "`t[*] Continuing. Be advised, NXLog must be installed to send logs to the sensor" -ForegroundColor Yellow
   }
   else {
-      Write-Verbose "[*] What is the IP of the Sensor? "
+      Write-Host "[*] What is the IP of the Sensor? "
       $response_ip = Read-Host
-      Write-Verbose "`t[+] Installing NXLog" -ForegroundColor Green
+      Write-Host "`t[+] Installing NXLog" -ForegroundColor Green
       & msiexec.exe /i "nxlog-ce-2.10.2150.msi" /quiet
       Start-Sleep 20
       Rename-Item -Path "$installdir\conf\nxlog.conf" -NewName "nxlog.conf.orig"
@@ -180,7 +180,7 @@ Write-Verbose "[+] Checking to make sure Operating System is compatible."
       Copy-Item -Path "$path\patterndb.xml" -Destination "$installdir\conf"
       Set-Service -Name nxlog -StartupType "Automatic" *>$null
       Start-Service -Name nxlog
-      Write-Verbose "[*] NXLog install is complete." -ForegroundColor Green
+      Write-Host "[*] NXLog install is complete." -ForegroundColor Green
   }
 
 <#
@@ -189,10 +189,10 @@ It is a good idea to go ahead and reboot now.
 
 $response_reboot = (Read-Host -Prompt "[+] Configuration is complete. Would you like to reboot the machine? Y/N").ToUpper()
 if ($response_reboot -ne "Y") {
-    Write-Verbose "[*] Please reboot when it is convenient. Exiting..." -ForegroundColor Yellow
+    Write-Host "[*] Please reboot when it is convenient. Exiting..." -ForegroundColor Yellow
     exit
 }
 else {
-    Write-Verbose "`tRebooting now." -ForegroundColor Green
+    Write-Host "`tRebooting now." -ForegroundColor Green
     Restart-Computer
 }
